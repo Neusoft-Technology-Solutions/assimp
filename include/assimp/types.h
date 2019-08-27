@@ -205,12 +205,38 @@ struct aiColor3D
 
     /** Access a specific color component */
     float operator[](unsigned int i) const {
-        return *(&r + i);
+        if ( 0 == i ) {
+            return r;
+        } else if ( 1 == i ) {
+            return g;
+        } else if ( 2 == i ) {
+            return b;
+        }
+        return r;
     }
 
     /** Access a specific color component */
     float& operator[](unsigned int i) {
-        return *(&r + i);
+#if defined(__GNUC__) && !defined(__clang__)
+        float* ip = &r;
+        if ( 0 == i ) {
+            ip = &r;
+        } else if ( 1 == i ) {
+            ip = &g;
+        } else if ( 2 == i ) {
+            ip = &b;
+        }
+        return *ip;
+#else
+        if ( 0 == i ) {
+            return r;
+        } else if ( 1 == i ) {
+            return g;
+        } else if ( 2 == i ) {
+            return b;
+        }
+        return r;
+#endif
     }
 
     /** Check whether a color is black */
