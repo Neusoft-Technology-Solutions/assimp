@@ -106,7 +106,7 @@ static bool IsAsciiSTL(const char* buffer, unsigned int fileSize) {
         if( fileSize >= 500 ) {
             isASCII = true;
             for( unsigned int i = 0; i < 500; i++ ) {
-                if( buffer[ i ] > 127 ) {
+                if( (unsigned char)(buffer[ i ]) > 127 ) {
                     isASCII = false;
                     break;
                 }
@@ -145,7 +145,7 @@ bool STLImporter::CanRead( const std::string& pFile, IOSystem* pIOHandler, bool 
         const char* tokens[] = {"STL","solid"};
         return SearchFileHeaderForToken(pIOHandler,pFile,tokens,2);
     }
-    
+
     return false;
 }
 

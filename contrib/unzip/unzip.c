@@ -988,7 +988,7 @@ local int unzlocal_CheckCurrentFileCoherencyHeader (s,piSizeVar,
         else if (uMagic!=0x04034b50)
             err=UNZ_BADZIPFILE;
     }
-    
+
     if (unzlocal_getShort(&s->z_filefunc, s->filestream,&uData) != UNZ_OK)
         err=UNZ_ERRNO;
 /*
@@ -1174,7 +1174,7 @@ extern int ZEXPORT unzOpenCurrentFile3 (file, method, level, raw, password)
     if (password != NULL)
     {
         int i;
-        s->pcrc_32_tab = get_crc_table();
+        s->pcrc_32_tab = (const unsigned long *)get_crc_table();
         init_keys(password,s->keys,s->pcrc_32_tab);
         if (ZSEEK(s->z_filefunc, s->filestream,
                   s->pfile_in_zip_read->pos_in_zipfile +

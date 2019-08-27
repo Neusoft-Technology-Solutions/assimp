@@ -231,6 +231,11 @@ private:
     }
 
 // XXX improve logging
+
+#ifdef _MAX
+   #undef _MAX
+#endif
+
 #define fbx_simple_enum_property(name, type, default_value) \
     type name() const { \
         const int ival = PropertyGet<int>(Props(), fbx_stringize(name), static_cast<int>(default_value)); \

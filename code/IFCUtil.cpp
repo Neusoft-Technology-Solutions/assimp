@@ -311,7 +311,7 @@ void TempMesh::FixupFaceOrientation()
         }
 
         // calculate its normal and reverse the poly if its facing towards the mesh center
-        IfcVector3 farthestNormal = ComputePolygonNormal(verts.data() + faceStartIndices[farthestIndex], vertcnt[farthestIndex]);
+        IfcVector3 farthestNormal = ComputePolygonNormal(&verts[0] + faceStartIndices[farthestIndex], vertcnt[farthestIndex]);
         IfcVector3 farthestCenter = std::accumulate(verts.begin() + faceStartIndices[farthestIndex],
             verts.begin() + faceStartIndices[farthestIndex] + vertcnt[farthestIndex], IfcVector3(0.0))
             / IfcFloat(vertcnt[farthestIndex]);

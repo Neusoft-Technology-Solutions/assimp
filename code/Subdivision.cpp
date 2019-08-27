@@ -535,9 +535,6 @@ void CatmullClarkSubdivider::InternSubdivide (
 
                             ai_assert(adj[o]-moffsets[nidx].first < mp->mNumFaces);
                             const aiFace& f = mp->mFaces[adj[o]-moffsets[nidx].first];
-#               ifdef ASSIMP_BUILD_DEBUG
-                            bool haveit = false;
-#               endif
 
                             // find our original point in the face
                             for (unsigned int m = 0; m < f.mNumIndices; ++m) {
@@ -558,9 +555,6 @@ void CatmullClarkSubdivider::InternSubdivide (
                                     // fixme: replace with mod face.mNumIndices?
                                     R += c0.midpoint+c1.midpoint;
 
-#                       ifdef ASSIMP_BUILD_DEBUG
-                                    haveit = true;
-#                       endif
                                     break;
                                 }
                             }

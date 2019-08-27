@@ -67,7 +67,7 @@ namespace FBX {
 
 #define MAGIC_NODE_TAG "_$AssimpFbx$"
 
-#define CONVERT_FBX_TIME(time) static_cast<double>(time) / 46186158000L
+#define CONVERT_FBX_TIME(time) static_cast<double>(time) / 46186158000.0
 
     // XXX vc9's debugger won't step into anonymous namespaces
 //namespace {

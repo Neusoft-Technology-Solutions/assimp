@@ -42,7 +42,7 @@ bool IOStreamBase::open( const std::string &name ) {
     if (m_file == ddl_nullptr) {
         return false;
     }
-    
+
     return true;
 }
 
@@ -69,7 +69,7 @@ struct DDLNodeIterator {
     const DDLNode::DllNodeList &m_childs;
     size_t m_idx;
 
-    DDLNodeIterator( const DDLNode::DllNodeList &childs ) 
+    DDLNodeIterator( const DDLNode::DllNodeList &childs )
     : m_childs( childs )
     , m_idx( 0 ) {
         // empty
@@ -125,7 +125,7 @@ bool OpenDDLExport::exportContext( Context *ctx, const std::string &filename ) {
     }
 
     const bool retValue( handleNode( root ) );
-    
+
     return retValue;
 }
 
@@ -258,7 +258,7 @@ bool OpenDDLExport::writeValueType( Value::ValueType type, size_t numItems, std:
         statement += "[";
         char buffer[ 256 ];
         ::memset( buffer, '\0', 256 * sizeof( char ) );
-        sprintf( buffer, "%d", numItems );
+        sprintf( buffer, "%zd", numItems );
         statement += buffer;
         statement += "]";
     }
@@ -279,7 +279,7 @@ bool OpenDDLExport::writeValue( Value *val, std::string &statement ) {
                 statement += "false";
             }
             break;
-        case Value::ddl_int8: 
+        case Value::ddl_int8:
             {
                 std::stringstream stream;
                 const int i = static_cast<int>( val->getInt8() );

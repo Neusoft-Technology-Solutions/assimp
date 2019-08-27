@@ -902,11 +902,11 @@ size_t CloseWindows(ContourVector& contours,
             curmesh.vertcnt.reserve(curmesh.vertcnt.size() + (*it).contour.size());
 
             // compare base poly normal and contour normal to detect if we need to reverse the face winding
-            IfcVector3 basePolyNormal = TempMesh::ComputePolygonNormal( curmesh.verts.data(), curmesh.vertcnt.front());
+            IfcVector3 basePolyNormal = TempMesh::ComputePolygonNormal( &curmesh.verts[0], curmesh.vertcnt.front());
             std::vector<IfcVector3> worldSpaceContourVtx( it->contour.size());
             for( size_t a = 0; a < it->contour.size(); ++a )
                 worldSpaceContourVtx[a] = minv * IfcVector3( it->contour[a].x, it->contour[a].y, 0.0);
-            IfcVector3 contourNormal = TempMesh::ComputePolygonNormal( worldSpaceContourVtx.data(), worldSpaceContourVtx.size());
+            IfcVector3 contourNormal = TempMesh::ComputePolygonNormal( &worldSpaceContourVtx[0], worldSpaceContourVtx.size());
             bool reverseCountourFaces = (contourNormal * basePolyNormal) > 0.0;
 
             // XXX this algorithm is really a bit inefficient - both in terms
@@ -1052,10 +1052,6 @@ IfcMatrix4 ProjectOntoPlane(std::vector<IfcVector2>& out_contour, const TempMesh
     if(!ok) {
         return IfcMatrix4();
     }
-#ifdef ASSIMP_BUILD_DEBUG
-    const IfcFloat det = m.Determinant();
-    ai_assert(std::fabs(det-1) < 1e-5);
-#endif
 
     IfcFloat zcoord = 0;
     out_contour.reserve(in_verts.size());

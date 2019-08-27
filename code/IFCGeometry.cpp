@@ -559,7 +559,7 @@ void ProcessExtrudedArea(const IfcExtrudedAreaSolid& solid, const TempMesh& curv
     IfcVector3 dir = IfcMatrix3(trafo) * extrusionDir;
 
     // reverse profile polygon if it's winded in the wrong direction in relation to the extrusion direction
-    IfcVector3 profileNormal = TempMesh::ComputePolygonNormal(in.data(), in.size());
+    IfcVector3 profileNormal = TempMesh::ComputePolygonNormal(&in[0], in.size());
     if( profileNormal * dir < 0.0 )
         std::reverse(in.begin(), in.end());
 

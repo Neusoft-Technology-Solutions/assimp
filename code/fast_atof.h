@@ -17,17 +17,11 @@
 
 #include <cmath>
 #include <limits>
+#include <limits.h>
 #include <stdint.h>
 #include <stdexcept>
 
 #include "StringComparison.h"
-
-
-#ifdef _MSC_VER
-#  include <stdint.h>
-#else
-#include "../include/assimp/Compiler/pstdint.h"
-#endif
 
 namespace Assimp
 {
